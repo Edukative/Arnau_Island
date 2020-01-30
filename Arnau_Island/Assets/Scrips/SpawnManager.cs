@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnMAnager : MonoBehaviour
+public class SpawnManager : MonoBehaviour
 {
     public GameObject enemyPrefab;
 
