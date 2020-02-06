@@ -6,9 +6,10 @@ public class Player_Controller : MonoBehaviour
 {
     private Rigidbody playerRB;
     public float speed;
-    private float horizontalInput;
+    //private float horizontalInput;
 
     GameObject focalPoint;
+    GameObject powerupIndicator;
 
     bool hasPowerUp;
     public float PowerUpStregth = 15;
@@ -17,14 +18,19 @@ public class Player_Controller : MonoBehaviour
     void Start()
     {
         playerRB = GetComponent<Rigidbody>();
-        focalPoint = GameObject.Find("FocalPoint"); ;
+        focalPoint = GameObject.Find("Focal Point"); ;
+
+        powerupIndicator = GameObject.Find("Powerupindicator");
+        powerupIndicator.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
         float forwardInput = Input.GetAxis("Vertical");
-        playerRB.AddForce(focalPoint. transform. forward * speed * forwardInput * Time.deltaTime, ForceMode.Force);
+        playerRB.AddForce(focalPoint.transform.forward * speed * forwardInput * Time.deltaTime, ForceMode.Force);
+
+        powerupIndicator.transform.position = transform.position;
     }
 
     IEnumerator PowerUpCountdownRoutine()

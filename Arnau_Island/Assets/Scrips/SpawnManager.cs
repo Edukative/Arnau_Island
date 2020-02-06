@@ -11,7 +11,7 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-         Instantiate(enemyPrefab, GenerateRandomPosition(), enemyPrefab.transform.rotation);
+        SpawnEnemyWave(1);
     }
 
     // Update is called once per frame
@@ -27,5 +27,16 @@ public class SpawnManager : MonoBehaviour
         Vector3 spawnRandomPosition = new Vector3(spawnRandomX, 0, spawnRandomZ);
         Debug.Log("Random position" + spawnRandomPosition);
         return spawnRandomPosition;
+    }
+
+    void SpawnEnemyWave(int enmiesToSpawn)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            GameObject enemy = Instantiate(enemyPrefab, GenerateRandomPosition(), enemyPrefab.transform.rotation);
+            Rigidbody enemyRB = enemy.GetComponent<Rigidbody>();
+            enemyRB.mass = Random.Range
+
+        }
     }
 }
