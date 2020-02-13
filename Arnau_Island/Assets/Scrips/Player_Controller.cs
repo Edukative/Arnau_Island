@@ -43,6 +43,7 @@ public class Player_Controller : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PowerUp"))
         {
+            powerupIndicator.SetActive(true);
             hasPowerUp = true;
             Destroy(other.gameObject);
             StartCoroutine(PowerUpCountdownRoutine());
