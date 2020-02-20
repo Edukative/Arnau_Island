@@ -37,6 +37,7 @@ public class Player_Controller : MonoBehaviour
     {
         yield return new WaitForSeconds(7);
         hasPowerUp = false;
+        powerupIndicator.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
