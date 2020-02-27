@@ -13,10 +13,16 @@ public class Player_Controller : MonoBehaviour
 
     bool hasPowerUp;
     public float PowerUpStregth = 15;
-    
+
+    private AudioSource playerAudio;
+
+    public AudioClip crashSound;
+    public AudioClip EPICcrashSound;
     // Start is called before the first frame update
     void Start()
     {
+        playerAudio = GetComponent<AudioSource>();
+
         playerRB = GetComponent<Rigidbody>();
         focalPoint = GameObject.Find("Focal Point"); ;
 
@@ -54,12 +60,20 @@ public class Player_Controller : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+       
         if (other.gameObject.CompareTag("Enemy") && hasPowerUp)
         {
             Rigidbody enemtRB = other.gameObject.GetComponent<Rigidbody>();
             Vector3 pushAwayEnemy = (other.gameObject.transform.position - transform.position);
             Debug.Log("Player collided with" + other.gameObject + "with powerup set to" + hasPowerUp);
             enemtRB.AddForce(pushAwayEnemy * PowerUpStregth, ForceMode.Impulse);
+
+            playerAudio.PlayOneShot(EPICcrashSound);
+        }
+
+        else if (other.gameObject.CompareTag("Enemy"))
+        {
+            playerAudio.PlayOneShot(crashSound);
         }
     }
 }

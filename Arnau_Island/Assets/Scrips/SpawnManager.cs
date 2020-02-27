@@ -17,6 +17,10 @@ public class SpawnManager : MonoBehaviour
     Vector3 initialPosition;
     GameObject Canvas;
     public Text gameOverText;
+
+    private AudioSource playerAudio;
+
+    public AudioClip crashSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,7 +53,7 @@ public class SpawnManager : MonoBehaviour
         {
             isGameOver = true;
             gameOverText.enabled = true;
-            if (Input.anyKeyDown)
+            if (Input.GetKeyDown("space"))
             {
                 RestartGame();
             }
@@ -97,4 +101,6 @@ public class SpawnManager : MonoBehaviour
             enemy.transform.localScale = new Vector3(currentMass, currentMass, currentMass);
         }
     }
+
+
 }
