@@ -71,7 +71,7 @@ public class Player_Controller : MonoBehaviour
             playerAudio.PlayOneShot(EPICcrashSound);
         }
 
-        else if (other.gameObject.CompareTag("Enemy"))
+        else if (other.gameObject.CompareTag("Enemy") && !hasPowerUp)
         {
             playerAudio.PlayOneShot(crashSound);
         }
