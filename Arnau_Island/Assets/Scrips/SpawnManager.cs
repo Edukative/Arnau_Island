@@ -60,23 +60,37 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    void RestartGame()
+    public void RestartGame()
     {
         player.transform.position = initialPosition;
         waves = 1;
-        SpawnEnemyWave(waves);
+
+        int enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
+
+        if (enemyCount > 0)
+        {
+            for (int i = 0; i <= enemyCount; i++)
+            {
+                GameObject EnemyToDestroy = GameObject.FindGameObjectWithTag("Enemy");
+                Destroy(EnemyToDestroy);
+            }
+            SpawnEnemyWave(waves);
+        }
+
         isGameOver = false;
         gameOverText.enabled = false;
+
         int powerupCount = GameObject.FindGameObjectsWithTag("PowerUp").Length;
         if (powerupCount == 0)
         {
             Instantiate(powerUpPrefab, GenerateRandomPosition(), powerUpPrefab.transform.rotation);
         }
+
         else if (powerupCount > 1)
         {
             for (int i = 0; i < powerupCount; i++)
             {
-                GameObject PowerupToDestroy = GameObject.FindGameObjectWithTag("Powerup");
+                GameObject PowerupToDestroy = GameObject.FindGameObjectWithTag("PowerUp");
                 Destroy(PowerupToDestroy);
             }
         }
@@ -92,7 +106,7 @@ public class SpawnManager : MonoBehaviour
 
     void SpawnEnemyWave(int enmiesToSpawn)
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < enmiesToSpawn; i++)
         {
             GameObject enemy = Instantiate(enemyPrefab, GenerateRandomPosition(), enemyPrefab.transform.rotation);
             Rigidbody enemyRB = enemy.GetComponent<Rigidbody>();
